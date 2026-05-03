@@ -57,11 +57,6 @@
         "monolog/monolog": "Allows more advanced logging of the application flow",
         "survos/api-grid-bundle": "For javascript-based grid rendering"
     },
-    "config": {
-        "allow-plugins": {
-            "survos/installer": true
-        }
-    },
     "conflict": {
         "survos/maker-bundle": "<1.2.57",
         "survos/html-prettify-bundle": "<1.2.57",
