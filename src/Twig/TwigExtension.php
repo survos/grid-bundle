@@ -2,7 +2,7 @@
 
 namespace Survos\Grid\Twig;
 
-use Survos\CoreBundle\Entity\RouteParametersInterface;
+use Survos\FieldBundle\Entity\RouteParametersInterface;
 use Survos\Grid\Attribute\Crud;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
