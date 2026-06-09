@@ -54,7 +54,6 @@ class GridComponent
             'tableId' => null,
             'tableClasses' => '',
             'scrollY' => '50vh',
-            'dom' => null,
 //            'stimulusController' => '@survos/grid/grid',
             'search' => true,
             'info' => false,
