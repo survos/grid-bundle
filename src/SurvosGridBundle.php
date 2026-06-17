@@ -16,6 +16,7 @@ use Symfony\Component\DependencyInjection\Reference;
 use Twig\Environment;
 
 #[RequiredBundle(SurvosKitBundle::class)]
+// Symfony\Component\HttpKernel\Bundle\Bundle <-- Flex auto-registration marker (see Survos\Kit\AbstractSurvosBundle)
 class SurvosGridBundle extends AbstractUxBundle
 {
     public const ASSET_PACKAGE = 'grid';
