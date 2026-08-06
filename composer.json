@@ -25,7 +25,7 @@
         "symfony/http-kernel": "^8.1",
         "symfony/options-resolver": "^8.1",
         "symfony/ux-twig-component": "^3",
-        "twig/twig": "^3.4",
+        "twig/twig": "^3.4|^4.0",
         "symfony/stimulus-bundle": "^3",
         "symfony/property-access": "^8.1"
     },
