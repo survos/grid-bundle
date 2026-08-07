@@ -6,6 +6,7 @@
   "symfony": {
     "controllers": {
       "grid": {
+        "name": "survos/grid/grid",
         "main": "src/controllers/grid_controller.js",
         "webpackMode": "eager",
         "fetch": "lazy",
