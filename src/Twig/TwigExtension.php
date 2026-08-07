@@ -2,34 +2,27 @@
 
 namespace Survos\Grid\Twig;
 
-use Survos\FieldBundle\Entity\RouteParametersInterface;
-use Survos\Grid\Attribute\Crud;
-use Symfony\Component\PropertyAccess\PropertyAccessor;
-use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
-use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\WebpackEncoreBundle\Twig\StimulusTwigExtension;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
-use function Symfony\Component\String\u;
 
 class TwigExtension extends AbstractExtension
 {
-    public function __construct(private PropertyAccessorInterface $propertyAccessor)
+    private function isValidUrl(string $url): bool
     {
+        return (bool) filter_var($url, FILTER_VALIDATE_URL);
     }
 
     public function getFilters(): array
     {
         return [
-            // If your filter generates SAFE HTML, you should add a third
-            // parameter: ['is_safe' => ['html']]
-            // Reference: https://twig.symfony.com/doc/3.x/advanced.html#automatic-escaping
+            new TwigFilter('urlize', fn ($x, $target = 'blank', ?string $label = null) => $this->isValidUrl($x)
+                ? sprintf('<a target="%s" href="%s">%s</a>', $target, $x, $label ?: $x)
+                : $x, [
+                    'is_safe' => ['html'],
+                ]),
+
             new TwigFilter('datatable', [$this, 'datatable'], [
                 'needs_environment' => true,
                 'is_safe' => ['html'],
@@ -44,25 +37,17 @@ class TwigExtension extends AbstractExtension
                 $object[$attribute] = $value;
                 return $object;
             }),
-//            $this->propertyAccessor->setValue($object, $attribute, $value)),
-            new TwigFunction('reverseRange', fn($x, $y) => sprintf("%s-%s", $x, $y)),
-            // survosCrudBundle?
-            new TwigFunction('browse_route', [$this, 'browseRoute']),
-
+            new TwigFunction('reverseRange', fn ($x, $y): string => sprintf('%s-%s', $x, $y)),
+            new TwigFunction('is_array', fn ($x): bool => is_array($x)),
+            new TwigFunction('is_object', fn ($x): bool => is_object($x)),
+            new TwigFunction('is_json', fn ($x): bool => json_validate($x)),
+            new TwigFunction('is_scalar', fn ($x): bool => is_string($x) || is_int($x) || is_numeric($x)),
+            new TwigFunction('is_list', fn ($x): bool => is_array($x) && array_is_list($x)),
         ];
     }
 
-    public function datatable($data)
+    public function datatable(Environment $env, $data): string
     {
-        return "For now, call grid instead.";
-    }
-
-    public function browseRoute(string $class)
-    {
-        $reflection = new \ReflectionClass($class);
-        foreach ($reflection->getAttributes(Crud::class) as $attribute) {
-            return $attribute->getArguments()['prefix'] . 'index';
-        }
-        return $class;
+        return 'For now, call grid instead.';
     }
 }

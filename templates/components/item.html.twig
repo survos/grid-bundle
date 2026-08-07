@@ -1,4 +1,4 @@
-{# templates/components/datatable.html.twig #}
+{# templates/components/item.html.twig #}
 {% set columns = this.normalizedColumns %}
 <div {{ this.stimulusController ? stimulus_controller(this.stimulusController) }}>
     <div class="m-4">
@@ -13,12 +13,35 @@
                             {{ block(c.name) }}
                         {% endwith %}
                     {% else %}
-                        {# handle bools #}
-                        {{ attribute(data, c.name)|default() }}
+                        {% set value = attribute(data, c.name)|default() %}
+                        {% if is_list(value) %}
+                            <ul>
+                                {% for v in value %}
+                                    <li>{{ is_scalar(v) ? v : v|json_encode }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% elseif is_array(value) %}
+                            {{ value|json_encode }}
+                        {% else %}
+                            {% if is_object(value) %}
+                                <pre>{{ value|json_encode(constant('JSON_UNESCAPED_SLASHES') + constant('JSON_PRETTY_PRINT')) }}</pre>
+                            {% else %}
+                                {% if value starts with 'http' %}
+                                    <a href="{{ value }}">
+                                        {% if value ends with 'jpg' %}
+                                            <img src="{{ value }}" class="img-thumbnail"/>
+                                        {% else %}
+                                            {{ value }}
+                                        {% endif %}
+                                    </a>
+                                {% else %}
+                                    {{ value|urlize }}
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
                     {% endif %}
                 </dd>
             {% endfor %}
-
         </dl>
     </div>
 </div>

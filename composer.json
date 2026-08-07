@@ -1,6 +1,6 @@
 {
     "name": "survos/grid-bundle",
-    "description": "incorporate DatatablesNet, using twig and stimulus, twig_component requires ^2.3",
+    "description": "The basics: render a plain in-memory or single-fetch table with Twig + Stimulus + DataTables.net (v3). No ApiPlatform required — see survos/api-grid-bundle for that.",
     "keywords": [
         "symfony-ux",
         "symfony6"
@@ -15,19 +15,15 @@
     "type": "symfony-bundle",
     "require": {
         "php": "^8.5",
-        "doctrine/doctrine-bundle": "^3.0",
-        "doctrine/orm": "^3.3",
-        "doctrine/persistence": "^4.1",
-        "survos/core-bundle": "^2.5",
+        "survos/field-bundle": "^2.5",
         "survos/kit-bundle": "^2.5",
         "symfony/config": "^8.1",
         "symfony/dependency-injection": "^8.1",
         "symfony/http-kernel": "^8.1",
         "symfony/options-resolver": "^8.1",
-        "symfony/ux-twig-component": "^3",
-        "twig/twig": "^3.4|^4.0",
         "symfony/stimulus-bundle": "^3",
-        "symfony/property-access": "^8.1"
+        "symfony/ux-twig-component": "^3",
+        "twig/twig": "^3.4|^4.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^2.0",
@@ -44,7 +40,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.6-dev"
+            "dev-main": "2.0-dev"
         },
         "symfony": {
             "require": "^7.3"
@@ -54,8 +50,7 @@
         "phpstan": "vendor/bin/phpstan analyse"
     },
     "suggest": {
-        "monolog/monolog": "Allows more advanced logging of the application flow",
-        "survos/api-grid-bundle": "For javascript-based grid rendering"
+        "survos/api-grid-bundle": "For ApiPlatform-backed AJAX grids with facets/searchBuilder/bulk actions"
     },
     "prefer-stable": true
 }

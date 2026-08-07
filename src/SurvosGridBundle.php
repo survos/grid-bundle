@@ -12,7 +12,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Kernel\RequiredBundle;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\DependencyInjection\Reference;
 use Twig\Environment;
 
 #[RequiredBundle(SurvosKitBundle::class)]
@@ -31,7 +30,6 @@ class SurvosGridBundle extends AbstractUxBundle
         if (class_exists(Environment::class)) {
             $builder
                 ->setDefinition('survos.grid_bundle', new Definition(TwigExtension::class))
-                ->setArgument('$propertyAccessor', new Reference('property_accessor'))
                 ->addTag('twig.extension')
                 ->setPublic(false)
             ;
@@ -40,10 +38,7 @@ class SurvosGridBundle extends AbstractUxBundle
         $builder->register(GridComponent::class)
             ->setAutowired(true)
             ->setAutoconfigured(true)
-            ->setArgument('$twig', new Reference('twig'))
-            ->setArgument('$logger', new Reference('logger'))
             ->setArgument('$stimulusController', $config['stimulus_controller'])
-            ->setArgument('$registry', new Reference('doctrine'))
         ;
 
         $builder->register(ItemGridComponent::class)
@@ -58,11 +53,6 @@ class SurvosGridBundle extends AbstractUxBundle
         $definition->rootNode()
             ->children()
             ->scalarNode('stimulus_controller')->defaultValue('@survos/grid/grid')->end()
-            ->scalarNode('widthFactor')->defaultValue(2)->end()
-            ->scalarNode('height')->defaultValue(30)->end()
-            ->scalarNode('foregroundColor')->defaultValue('green')->end()
             ->end();
-
-        ;
     }
 }

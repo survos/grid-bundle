@@ -1,8 +1,8 @@
 {
   "name": "@survos/grid",
-  "description": "integrate php and javascript helpers for DataTables.net",
+  "description": "the basics: render a plain in-memory or single-fetch table with DataTables.net (v3), no ApiPlatform required",
   "license": "MIT",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "symfony": {
     "controllers": {
       "grid": {
@@ -11,26 +11,14 @@
         "fetch": "lazy",
         "enabled": true,
         "autoimport": {
-          "datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css": true,
-          "datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css": true,
-          "datatables.net-scroller-bs5/css/scroller.bootstrap5.min.css": true,
-          "datatables.net-searchpanes-bs5/css/searchPanes.bootstrap5.min.css": true,
-          "datatables.net-select-bs5/css/select.bootstrap5.min.css": true,
-          "datatables.net-bs5/css/dataTables.bootstrap5.min.css": true
+          "datatables.net-bs5/css/dataTables.bootstrap5.css": true
         }
       }
     },
     "importmap": {
       "@hotwired/stimulus": "^3.2.2",
-      "@popperjs/core": "^2.11.8",
-      "bootstrap": "^5.3.8",
-      "datatables.net-plugins/i18n/en-GB.mjs": "^2.3.7",
-      "datatables.net-bs5": "^2.3.7",
-      "datatables.net-buttons-bs5": "^3.2.6",
-      "datatables.net-select-bs5": "^3.1.3",
-      "datatables.net-scroller-bs5": "^2.4.3",
-      "datatables.net-responsive-bs5": "^3.0.8",
-      "datatables.net-searchpanes-bs5": "^2.3.5"
+      "datatables.net-bs5": "3.0.1",
+      "datatables.net-bs5/css/dataTables.bootstrap5.css": "3.0.1"
     }
   },
   "peerDependencies": {
@@ -40,17 +28,6 @@
     "@hotwired/stimulus": "^3.2.2"
   },
   "dependencies": {
-    "@popperjs/core": "^2.11.8",
-    "datatables.net-buttons-bs5": "^3.2",
-    "datatables.net-colreorder": "^2.1.2",
-    "datatables.net-colreorder-bs5": "^2.1.2",
-    "datatables.net-datetime": "^1.6.3",
-    "datatables.net-fixedcolumns-bs5": "^5.0.5",
-    "datatables.net-fixedheader-bs5": "^4.0.6",
-    "datatables.net-responsive": "^3.0.8",
-    "datatables.net-responsive-bs5": "^3.0.8",
-    "datatables.net-scroller": "^2.4.3",
-    "datatables.net-scroller-bs5": "^2.4.3",
-    "bootstrap": "^5.3.8"
+    "datatables.net-bs5": "3.0.1"
   }
 }

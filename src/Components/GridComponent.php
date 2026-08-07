@@ -2,43 +2,38 @@
 
 namespace Survos\Grid\Components;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
-use Psr\Log\LoggerInterface;
+use Survos\FieldBundle\Service\FieldReader;
 use Survos\Grid\Model\Column;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
-use Twig\Environment;
 
 #[AsTwigComponent('grid', template: '@SurvosGrid/components/grid.html.twig')]
 class GridComponent
 {
     public function __construct(
-        private Registry $registry,
-        private Environment $twig,
-        private LoggerInterface $logger,
+        private FieldReader $fieldReader,
         public ?string $stimulusController,
-    )
-    {
+    ) {
     }
 
     public ?iterable $data = null;
-    public array $columns;
+    public array $columns = [];
     public bool $search = true;
     public bool $trans = true;
     public string|bool|null $domain = null;
-    public int $pageLength=10;
-
+    public int $pageLength = 10;
 
     public bool $useDatatables = true;
     public bool $info = false;
     public bool $condition = true;
     public string $scrollY = '70vh';
-    public string $dom='?';
-    public array $searchPanesFields=[];
+    public string $dom = 'lfrtip';
+    public array $searchPanesFields = [];
     public ?string $tableId = null;
     public ?string $rowAlias = null;
     public string $tableClasses = '';
+    public ?string $remoteUrl = null;
 
     #[PreMount]
     public function preMount(array $parameters = []): array
@@ -47,14 +42,14 @@ class GridComponent
         $resolver->setDefaults([
             'data' => null,
             'class' => null,
-            'dom' => 'Plfrtip',
+            'dom' => 'lfrtip',
             'rowAlias' => null,
             'useDatatables' => true,
             'pageLength' => 20,
             'tableId' => null,
             'tableClasses' => '',
             'scrollY' => '50vh',
-//            'stimulusController' => '@survos/grid/grid',
+            'remoteUrl' => null,
             'search' => true,
             'info' => false,
             'condition' => true,
@@ -64,16 +59,16 @@ class GridComponent
             'columns' => [],
         ]);
         $parameters = $resolver->resolve($parameters);
-        if (is_null($parameters['data'])) {
-            $class = $parameters['class'];
-            assert($class, "Must pass class or data");
 
-            // @todo: something clever to limit memory, use yield?
-            $parameters['data'] = $this->registry->getRepository($class)->findAll();
+        // data is always supplied by the caller: this component doesn't reach into
+        // Doctrine on your behalf. `class` here is only used to derive columns.
+        if (count($parameters['columns']) === 0 && $parameters['class']) {
+            $parameters['columns'] = array_map(
+                fn ($descriptor) => Column::fromFieldDescriptor($descriptor),
+                $this->fieldReader->getDescriptors($parameters['class'])
+            );
         }
-        //        $resolver->setAllowedValues('type', ['success', 'danger']);
-        //        $resolver->setRequired('message');
-        //        $resolver->setAllowedTypes('message', 'string');
+
         return $parameters;
     }
 
@@ -85,6 +80,12 @@ class GridComponent
         $normalizedColumns = [];
         foreach ($this->columns as $c) {
             if (empty($c)) {
+                continue;
+            }
+            if ($c instanceof Column) {
+                if ($c->condition) {
+                    $normalizedColumns[$c->name] = $c;
+                }
                 continue;
             }
             if (is_string($c)) {
@@ -106,12 +107,10 @@ class GridComponent
         $count = 0;
         // count the number, if > 6 we could figured out the best layout
         foreach ($this->normalizedColumns() as $column) {
-//            dd($column);
             if ($column->inSearchPane) {
                 $count++;
             }
         }
-        $count = min($count, 6);
-        return $count;
+        return min($count, 6);
     }
 }
