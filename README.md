@@ -25,7 +25,7 @@ composer config repositories.survos_grid_bundle '{"type": "vcs", "url": "git@git
 symfony new grid-demo --webapp --version=next --php=8.2 && cd grid-demo
 composer config extra.symfony.allow-contrib true
 composer req symfony/asset-mapper symfony/stimulus-bundle:2.x-dev
-composer req survos/grid-bundle survos/scraper-bundle
+composer req survos/grid-bundle
 
 # make it prettier with bootstrap, but not necessary
 bin/console importmap:require bootstrap
