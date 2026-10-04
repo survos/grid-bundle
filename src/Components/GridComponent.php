@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Survos\Grid\Components;
 
 use Survos\FieldBundle\Service\FieldReader;
@@ -19,6 +21,9 @@ class GridComponent
 
     public ?iterable $data = null;
     public array $columns = [];
+    public array $extensions = [];
+    public array $options = [];
+    public string $locale = "";
     public bool $search = true;
     public bool $trans = true;
     public string|bool|null $domain = null;
@@ -57,7 +62,13 @@ class GridComponent
             'domain' => null,
             'caller' => null,
             'columns' => [],
+            'extensions' => [],
+            'options' => [],
+            'locale' => '',
         ]);
+        $resolver->setAllowedTypes('extensions', 'array');
+        $resolver->setAllowedTypes('options', 'array');
+        $resolver->setAllowedTypes('locale', 'string');
         $parameters = $resolver->resolve($parameters);
 
         // data is always supplied by the caller: this component doesn't reach into

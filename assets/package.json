@@ -1,25 +1,50 @@
 {
-  "name": "@survos/grid",
+  "name": "@survos/grid-bundle",
   "description": "the basics: render a plain in-memory or single-fetch table with DataTables.net (v3), no ApiPlatform required",
   "license": "MIT",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "symfony": {
     "controllers": {
       "grid": {
-        "name": "survos/grid/grid",
         "main": "src/controllers/grid_controller.js",
-        "webpackMode": "eager",
+        "webpackMode": "lazy",
         "fetch": "lazy",
         "enabled": true,
-        "autoimport": {
-          "datatables.net-bs5/css/dataTables.bootstrap5.css": true
-        }
+        "autoimport": {}
       }
     },
     "importmap": {
       "@hotwired/stimulus": "^3.2.2",
-      "datatables.net-bs5": "3.0.1",
-      "datatables.net-bs5/css/dataTables.bootstrap5.css": "3.0.1"
+      "datatables.net": "3.1.3",
+      "datatables.net-bs5": "3.1.3",
+      "datatables.net-bs5/css/dataTables.bootstrap5.css": "3.1.3",
+      "datatables.net-buttons": "4.1.2",
+      "datatables.net-buttons-bs5": "4.1.2",
+      "datatables.net-buttons-bs5/css/buttons.bootstrap5.css": "4.1.2",
+      "datatables.net-columncontrol": "2.1.2",
+      "datatables.net-columncontrol-bs5": "2.1.2",
+      "datatables.net-columncontrol-bs5/css/columnControl.bootstrap5.css": "2.1.2",
+      "datatables.net-responsive": "4.1.1",
+      "datatables.net-responsive-bs5": "4.1.1",
+      "datatables.net-responsive-bs5/css/responsive.bootstrap5.css": "4.1.1",
+      "datatables.net-select": "4.1.1",
+      "datatables.net-select-bs5": "4.1.1",
+      "datatables.net-select-bs5/css/select.bootstrap5.css": "4.1.1",
+      "datatables.net-searchbuilder": "2.1.1",
+      "datatables.net-searchbuilder-bs5": "2.1.1",
+      "datatables.net-searchbuilder-bs5/css/searchBuilder.bootstrap5.css": "2.1.1",
+      "datatables.net-fixedcolumns": "6.1.1",
+      "datatables.net-fixedcolumns-bs5": "6.1.1",
+      "datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.css": "6.1.1",
+      "datatables.net-fixedheader": "5.1.2",
+      "datatables.net-fixedheader-bs5": "5.1.2",
+      "datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.css": "5.1.2",
+      "datatables.net-rowgroup": "2.1.1",
+      "datatables.net-rowgroup-bs5": "2.1.1",
+      "datatables.net-rowgroup-bs5/css/rowGroup.bootstrap5.css": "2.1.1",
+      "datatables.net-plugins/i18n/en-GB.mjs": "3.1.2",
+      "datatables.net-plugins/i18n/es-ES.mjs": "3.1.2",
+      "datatables.net-plugins/i18n/de-DE.mjs": "3.1.2"
     }
   },
   "peerDependencies": {
@@ -29,6 +54,24 @@
     "@hotwired/stimulus": "^3.2.2"
   },
   "dependencies": {
-    "datatables.net-bs5": "3.0.1"
+    "datatables.net": "3.1.3",
+    "datatables.net-bs5": "3.1.3",
+    "datatables.net-buttons": "4.1.2",
+    "datatables.net-buttons-bs5": "4.1.2",
+    "datatables.net-columncontrol": "2.1.2",
+    "datatables.net-columncontrol-bs5": "2.1.2",
+    "datatables.net-responsive": "4.1.1",
+    "datatables.net-responsive-bs5": "4.1.1",
+    "datatables.net-select": "4.1.1",
+    "datatables.net-select-bs5": "4.1.1",
+    "datatables.net-searchbuilder": "2.1.1",
+    "datatables.net-searchbuilder-bs5": "2.1.1",
+    "datatables.net-fixedcolumns": "6.1.1",
+    "datatables.net-fixedcolumns-bs5": "6.1.1",
+    "datatables.net-fixedheader": "5.1.2",
+    "datatables.net-fixedheader-bs5": "5.1.2",
+    "datatables.net-rowgroup": "2.1.1",
+    "datatables.net-rowgroup-bs5": "2.1.1",
+    "datatables.net-plugins": "3.1.2"
   }
 }

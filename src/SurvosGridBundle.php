@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Survos\Grid;
 
 use Survos\Grid\Components\GridComponent;
@@ -18,7 +20,10 @@ use Twig\Environment;
 // Symfony\Component\HttpKernel\Bundle\Bundle <-- Flex auto-registration marker (see Survos\Kit\AbstractSurvosBundle)
 class SurvosGridBundle extends AbstractUxBundle
 {
-    public const ASSET_PACKAGE = 'grid';
+    protected function assetNamespace(): ?string
+    {
+        return '';
+    }
     // $config is the bundle Configuration that you usually process in ExtensionInterface::load() but already merged and processed
     /**
      * @param array<mixed> $config
@@ -52,7 +57,7 @@ class SurvosGridBundle extends AbstractUxBundle
         // since the configuration is short, we can add it here
         $definition->rootNode()
             ->children()
-            ->scalarNode('stimulus_controller')->defaultValue('@survos/grid/grid')->end()
+            ->scalarNode('stimulus_controller')->defaultValue('survos--grid-bundle--grid')->end()
             ->end();
     }
 }

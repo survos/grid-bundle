@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Survos\Grid\Components;
 
 use Survos\FieldBundle\Service\FieldReader;
@@ -20,7 +22,7 @@ class ItemGridComponent
     public array $columns = [];
     public array|string $exclude = [];
 
-    public ?string $stimulusController = '@survos/grid/item_grid';
+    public ?string $stimulusController = null;
 
     #[PreMount]
     public function preMount(array $parameters = []): array
@@ -54,7 +56,7 @@ class ItemGridComponent
                         $this->fieldReader->getDescriptors($parameters['class'])
                     )
                 ));
-            } elseif (array_is_list($data) && count($data)) {
+            } elseif (is_array($data) && array_is_list($data) && count($data) && is_array($data[0])) {
                 $columns = array_diff(array_keys($data[0]), $exclude);
                 $parameters['columns'] = $columns;
             } elseif (is_array($data)) {

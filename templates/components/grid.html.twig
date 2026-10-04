@@ -1,36 +1,29 @@
-{# templates/components/grid.html.twig #}
-{% if remoteUrl %}
-    {# no server-rendered rows: the controller fetches remoteUrl once and builds the table client-side #}
-    {% set remoteColumns = [] %}
-    {% for c in this.normalizedColumns %}
-        {% set remoteColumns = remoteColumns|merge([{name: c.name, title: this.trans ? c.title|trans : c.title}]) %}
-    {% endfor %}
-    <table {{ this.tableId ? 'id="%s"'|format(this.tableId)|raw }}
-            {{ this.stimulusController ? stimulus_controller(this.stimulusController, {
-                useDatatables: this.useDatatables,
-                search: this.search,
-                pageLength: this.pageLength,
-                scrollY: this.scrollY,
-                remoteUrl: this.remoteUrl,
-                columns: remoteColumns,
-            }) }}
-            class="table table-striped {{ this.tableClasses }}"
-            {{ this.stimulusController ? stimulus_target(this.stimulusController, 'table') }}>
-    </table>
-{% elseif condition %}
+{# Keep the controller on a stable wrapper: DataTables moves the table during init/destroy. #}
+{% if condition %}
     {% set columns = this.normalizedColumns %}
-    <table {{ this.tableId ? 'id="%s"'|format(this.tableId)|raw }}
+    {% set remoteColumns = [] %}
+    {% if remoteUrl %}
+        {% for c in columns %}
+            {% set remoteColumns = remoteColumns|merge([{name: c.name, title: this.trans ? c.title|trans : c.title, sortable: c.sortable, searchable: c.searchable}]) %}
+        {% endfor %}
+    {% endif %}
+    <div {{ this.stimulusController ? stimulus_controller(this.stimulusController, {
+        extensions: this.extensions,
+        options: this.options ?: null,
+        locale: this.locale,
+        useDatatables: this.useDatatables,
+        search: this.search,
+        info: this.info,
+        dom: this.dom,
+        pageLength: this.pageLength,
+        scrollY: this.scrollY,
+        remoteUrl: this.remoteUrl,
+        columns: remoteUrl ? remoteColumns : null,
+    }) }}>
+        <table {{ this.tableId ? 'id="%s"'|format(this.tableId)|raw }}
             class="table table-striped {{ this.tableClasses }}"
-            {{ this.stimulusController ? stimulus_controller(this.stimulusController, {
-                useDatatables: this.useDatatables,
-                search: this.search,
-                info: this.info,
-                dom: this.dom,
-                pageLength: this.pageLength,
-                searchPanesColumns: this.searchPanesColumns,
-                scrollY: this.scrollY,
-            }) }}
             {{ this.stimulusController ? stimulus_target(this.stimulusController, 'table') }}>
+        {% if not remoteUrl %}
         <thead>
         <tr>
             {% for c in columns %}
@@ -77,10 +70,12 @@
                 {% endfor %}
             </tr>
         {% else %}
-            <tr>
-                <td colspan="{{ columns|length }}">no records found</td>
-            </tr>
+            {% if not this.useDatatables %}
+                <tr><td colspan="{{ columns|length }}">no records found</td></tr>
+            {% endif %}
         {% endfor %}
         </tbody>
-    </table>
+        {% endif %}
+        </table>
+    </div>
 {% endif %}
