@@ -35,6 +35,8 @@ The `Column` model and optional `class` metadata from `survos/field-bundle` supp
 - [Consumer inventory and scope](docs/inventory.md)
 - [Verification](docs/testing.md)
 
+Grid is a heavier foundation than simple-datatables. For the Survos platform, the benefit is one shared implementation and theme across local tables and API Grid, with optional extensions loaded only when needed. This choice prioritizes that integration over minimum core download size.
+
 ## Shared base and application example
 
 `survos/api-grid-bundle` requires this bundle and extends its `GridController`. Grid owns DataTables initialization, teardown, core styles and optional extension loading. API Grid adds API Platform pagination, filters, facets and browser-side cell rendering. Use `<twig:grid>` for an in-memory collection or one JSON fetch; use `<twig:api_grid>` when the server should page and filter the collection.
