@@ -33,6 +33,7 @@ class TwigExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
+            new TwigFunction('grid_available', static fn (): bool => true),
             new TwigFunction('setAttribute', function (array $object, $attribute, $value) {
                 $object[$attribute] = $value;
                 return $object;
