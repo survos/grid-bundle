@@ -14,7 +14,7 @@ const modules = process.env.GRID_NODE_MODULES || resolve(root, 'grid-bundle/asse
 const manifest = JSON.parse(await readFile(resolve(root, 'grid-bundle/assets/package.json')));
 const imports = {
   '@survos/grid-bundle/': '/grid/',
-  '@survos/js-twig/routing': '/routing.js',
+  '@survos/js-twig-bundle/routing': '/routing.js',
 };
 for (const name of Object.keys({ ...manifest.dependencies, ...manifest.devDependencies,
   '@tacman1123/twig-browser': '1', '@tacman1123/twig-browser/adapters/symfony': '1' })) {

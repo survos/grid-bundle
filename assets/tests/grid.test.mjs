@@ -32,7 +32,7 @@ async function harness({ delayExtension } = {}) {
       : specifier === 'datatables.net-bs5' ? { default: Table }
       : specifier === '@tacman1123/twig-browser' ? { createEngine: () => ({}) }
       : specifier === '@tacman1123/twig-browser/adapters/symfony' ? { installSymfonyTwigAPI() {} }
-      : specifier === '@survos/js-twig/routing' ? { path() {} }
+      : specifier === '@survos/js-twig-bundle/routing' ? { path() {} }
       : { default: { name: specifier } };
     const mod = new vm.SyntheticModule(Object.keys(values), function () {
       for (const [name, value] of Object.entries(values)) this.setExport(name, value);
