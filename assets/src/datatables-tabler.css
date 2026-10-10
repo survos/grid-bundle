@@ -71,7 +71,7 @@ div.dt-scroll-footInner table.table-bordered tr th:first-child {
 /* No --bs- vars to override */
 
 /* datatables.net-columncontrol-bs5 */
-:root {
+:root:root {
     --dtcc-button_background: transparent;
     --dtcc-button_border: none;
     --dtcc-button_border-radius: var(--tblr-border-radius-sm);
@@ -111,7 +111,7 @@ div.dt-scroll-footInner table.table-bordered tr th:first-child {
     --dtcc-dropdown-button_hover-background: var(--tblr-dropdown-link-hover-bg);
 }
 
-div.dtcc-dropdown {
+body div.dtcc-dropdown {
     z-index: var(--tblr-dropdown-zindex, 1000);
     overflow: hidden;
     border: var(--tblr-dropdown-border-width, 1px) solid var(--tblr-dropdown-border-color, var(--tblr-border-color));
@@ -121,18 +121,18 @@ div.dtcc-dropdown {
     box-shadow: var(--tblr-dropdown-box-shadow, var(--tblr-box-shadow));
 }
 
-div.dtcc-dropdown .dtcc-dropdown-liner {
+body div.dtcc-dropdown .dtcc-dropdown-liner {
     background: inherit;
 }
 
 table.dataTable span.dtcc div.dtcc-list,
-div.dtcc-dropdown div.dtcc-list {
+body div.dtcc-dropdown div.dtcc-list {
     width: 100%;
     min-width: 10rem;
 }
 
 table.dataTable span.dtcc div.dtcc-list div.dtcc-list-controls,
-div.dtcc-dropdown div.dtcc-list div.dtcc-list-controls {
+body div.dtcc-dropdown div.dtcc-list div.dtcc-list-controls {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.25rem;
@@ -141,8 +141,8 @@ div.dtcc-dropdown div.dtcc-list div.dtcc-list-controls {
 
 table.dataTable span.dtcc div.dtcc-list div.dtcc-list-controls button.dtcc-list-selectAll,
 table.dataTable span.dtcc div.dtcc-list div.dtcc-list-controls button.dtcc-list-selectNone,
-div.dtcc-dropdown div.dtcc-list div.dtcc-list-controls button.dtcc-list-selectAll,
-div.dtcc-dropdown div.dtcc-list div.dtcc-list-controls button.dtcc-list-selectNone {
+body div.dtcc-dropdown div.dtcc-list div.dtcc-list-controls button.dtcc-list-selectAll,
+body div.dtcc-dropdown div.dtcc-list div.dtcc-list-controls button.dtcc-list-selectNone {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -159,14 +159,14 @@ div.dtcc-dropdown div.dtcc-list div.dtcc-list-controls button.dtcc-list-selectNo
 
 table.dataTable span.dtcc div.dtcc-list div.dtcc-list-controls button.dtcc-list-selectAll:hover,
 table.dataTable span.dtcc div.dtcc-list div.dtcc-list-controls button.dtcc-list-selectNone:hover,
-div.dtcc-dropdown div.dtcc-list div.dtcc-list-controls button.dtcc-list-selectAll:hover,
-div.dtcc-dropdown div.dtcc-list div.dtcc-list-controls button.dtcc-list-selectNone:hover {
+body div.dtcc-dropdown div.dtcc-list div.dtcc-list-controls button.dtcc-list-selectAll:hover,
+body div.dtcc-dropdown div.dtcc-list div.dtcc-list-controls button.dtcc-list-selectNone:hover {
     background-color: rgb(var(--tblr-tertiary-bg-rgb));
     text-decoration: none;
 }
 
 table.dataTable span.dtcc div.dtcc-list div.dtcc-list-controls input.dtcc-list-search,
-div.dtcc-dropdown div.dtcc-list div.dtcc-list-controls input.dtcc-list-search {
+body div.dtcc-dropdown div.dtcc-list div.dtcc-list-controls input.dtcc-list-search {
     grid-column: 1 / -1;
     width: 100%;
     min-width: 0;
@@ -179,7 +179,7 @@ div.dtcc-dropdown div.dtcc-list div.dtcc-list-controls input.dtcc-list-search {
 }
 
 table.dataTable span.dtcc div.dtcc-list div.dtcc-list-buttons,
-div.dtcc-dropdown div.dtcc-list div.dtcc-list-buttons {
+body div.dtcc-dropdown div.dtcc-list div.dtcc-list-buttons {
     max-height: var(--dtcc-list-buttons_max-height);
     overflow: auto;
     background: var(--dtcc-list-buttons_background);
