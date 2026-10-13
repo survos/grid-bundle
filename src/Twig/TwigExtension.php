@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Survos\Grid\Twig;
 
 use Twig\Environment;
@@ -36,6 +38,7 @@ class TwigExtension extends AbstractExtension
             new TwigFunction('grid_available', static fn (): bool => true),
             new TwigFunction('setAttribute', function (array $object, $attribute, $value) {
                 $object[$attribute] = $value;
+
                 return $object;
             }),
             new TwigFunction('reverseRange', fn ($x, $y): string => sprintf('%s-%s', $x, $y)),

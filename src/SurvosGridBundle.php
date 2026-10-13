@@ -24,6 +24,7 @@ class SurvosGridBundle extends AbstractUxBundle
     {
         return '';
     }
+
     // $config is the bundle Configuration that you usually process in ExtensionInterface::load() but already merged and processed
     /**
      * @param array<mixed> $config

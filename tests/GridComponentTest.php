@@ -11,8 +11,8 @@ use Survos\Grid\Components\ItemGridComponent;
 use Survos\Grid\Model\Column;
 use Symfony\Bridge\Twig\Extension\TranslationExtension;
 use Symfony\Component\Translation\Translator;
-use Symfony\UX\StimulusBundle\Twig\StimulusTwigExtension;
 use Symfony\UX\StimulusBundle\Helper\StimulusHelper;
+use Symfony\UX\StimulusBundle\Twig\StimulusTwigExtension;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -39,7 +39,9 @@ final class GridComponentTest extends TestCase
             'locale' => 'de',
         ]);
         foreach ($parameters as $key => $value) {
-            if (property_exists($grid, $key)) $grid->$key = $value;
+            if (property_exists($grid, $key)) {
+                $grid->$key = $value;
+            }
         }
         $loader = new FilesystemLoader(__DIR__.'/../templates');
         $twig = new Environment($loader, ['strict_variables' => true]);

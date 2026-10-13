@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Survos\Grid\Model;
 
 use Survos\FieldBundle\Model\FieldDescriptor;

@@ -23,7 +23,7 @@ class GridComponent
     public array $columns = [];
     public array $extensions = [];
     public array $options = [];
-    public string $locale = "";
+    public string $locale = '';
     public bool $search = true;
     public bool $trans = true;
     public string|bool|null $domain = null;
@@ -73,7 +73,7 @@ class GridComponent
 
         // data is always supplied by the caller: this component doesn't reach into
         // Doctrine on your behalf. `class` here is only used to derive columns.
-        if (count($parameters['columns']) === 0 && $parameters['class']) {
+        if (0 === count($parameters['columns']) && $parameters['class']) {
             $parameters['columns'] = array_map(
                 fn ($descriptor) => Column::fromFieldDescriptor($descriptor),
                 $this->fieldReader->getDescriptors($parameters['class'])
@@ -110,6 +110,7 @@ class GridComponent
                 $normalizedColumns[$column->name] = $column;
             }
         }
+
         return $normalizedColumns;
     }
 
@@ -119,9 +120,10 @@ class GridComponent
         // count the number, if > 6 we could figured out the best layout
         foreach ($this->normalizedColumns() as $column) {
             if ($column->inSearchPane) {
-                $count++;
+                ++$count;
             }
         }
+
         return min($count, 6);
     }
 }

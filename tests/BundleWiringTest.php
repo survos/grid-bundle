@@ -44,7 +44,9 @@ final class BundleWiringTest extends TestCase
     {
         $owners = [];
         foreach (glob(dirname(__DIR__, 2).'/*/assets/package.json') as $path) {
-            if (str_contains(file_get_contents($path), 'datatables.net')) $owners[] = basename(dirname($path, 2));
+            if (str_contains(file_get_contents($path), 'datatables.net')) {
+                $owners[] = basename(dirname($path, 2));
+            }
         }
         self::assertSame(['grid-bundle'], $owners);
         $base = json_decode(file_get_contents(__DIR__.'/../composer.json'), true, flags: JSON_THROW_ON_ERROR);

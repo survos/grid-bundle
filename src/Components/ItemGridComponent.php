@@ -17,7 +17,7 @@ class ItemGridComponent
     {
     }
 
-    public $data = null;
+    public $data;
 
     public array $columns = [];
     public array|string $exclude = [];
@@ -45,7 +45,7 @@ class ItemGridComponent
             $data = (array) $data;
         }
 
-        if (count($parameters['columns']) === 0) {
+        if (0 === count($parameters['columns'])) {
             if ($parameters['class']) {
                 // entity's own #[Field] attributes are the source of truth for columns
                 $parameters['columns'] = array_values(array_filter(
@@ -63,6 +63,7 @@ class ItemGridComponent
                 $parameters['columns'] = array_diff(array_keys($data), $exclude);
             }
         }
+
         return $parameters;
     }
 
@@ -90,6 +91,7 @@ class ItemGridComponent
                 $normalizedColumns[$column->name] = $column;
             }
         }
+
         return $normalizedColumns;
     }
 }
